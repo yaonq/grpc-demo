@@ -1,0 +1,18 @@
+// 指定语法版本
+syntax = "proto3";
+
+// 指定包名.指当前目录，切记要和protoc中--go_out指定的相同
+option go_package = "./proto";
+
+// 定义对象模型
+message Request {
+    string name = 1;
+}
+
+message  Response {
+    int32 code = 1;
+    string msg = 2;
+}
+
+// 根据proto文件生成代码；--proto_path从何处查找依赖的文件；--go_out生成的代码位置；proto/test.proto目标文件路径
+// cd /home/grpc-demo/01_createProtoFile/ && protoc --proto_path=. --go_out=. proto/test.proto
