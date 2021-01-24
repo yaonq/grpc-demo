@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option go_package = "./proto";
+
+message Request {
+    int32 dogId = 1;
+}
+
+message Dog {
+    string name = 1;
+    int32 age = 2;
+}
+
+message  Msg {
+    int32 code = 1;
+    string err = 2;
+}
+
+message Response {
+    Dog data = 1;
+    Msg msg = 2;
+}
+
+service DogService {
+    rpc GetDogInfo(Request) returns (Response);
+}
+
+// protoc --go_out=plugins=grpc:. proto/server.proto 
