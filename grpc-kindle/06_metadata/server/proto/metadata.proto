@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "github.com/ygongq/grpc-demo/grpc-kindle/05_err/server/proto";
+
+message unaryInterceptorRequest {
+    string ID = 1;
+}
+
+message unaryInterceptorResponse {
+    string Value = 1;
+}
+
+service unaryInterceptor {
+    rpc getValue(unaryInterceptorRequest) returns(unaryInterceptorResponse) {}
+}
+
+

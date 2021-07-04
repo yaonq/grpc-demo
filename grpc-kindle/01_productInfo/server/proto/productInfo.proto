@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+// // 防止多个proto文件中定义相同的message而产生冲突
+// package ./productInfo;
+
+// 生成的go代码所在的文件夹
+option go_package = "github.com/ygongq/grpc-demo/grpc-kindle/01_productInfo/server/proto";
+
+// 商品
+message Product {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+}
+
+message ProductID {
+    string value = 1;
+}
+
+service Productlnfo {
+    rpc AddProduct(Product) returns (ProductID) {}
+    rpc GetProduct(ProductID) returns (Product) {}
+}
+

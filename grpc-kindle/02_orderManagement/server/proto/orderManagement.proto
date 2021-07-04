@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+package proto;
+
+option go_package = "github.com/ygongq/grpc-demo/grpc-kindle/02_orderManagement/server/proto";
+
+message Order {
+    string id = 1;
+    repeated string items = 2;
+    string description = 3;
+    float price = 4;
+    string destination = 5;
+}
+
+message CombinedShipment {
+    string id = 1;
+    string status = 2;
+    repeated Order ordersList = 3;
+}
+
+service OrderManagement {
+    // 一元模式模式
+    rpc addOrder(Order) returns (google.protobuf.StringValue){}
+    rpc getOrder(google.protobuf.StringValue) returns (Order){}
+    // 服务端流模式
+    rpc searchOrders(google.protobuf.StringValue) returns (stream Order){}
+    // 客户端流模式
+    rpc updateOrders(stream Order) returns (google.protobuf.StringValue){}
+    // 双向流模式
+    rpc processOrders(stream google.protobuf.StringValue) returns (stream CombinedShipment){}
+}
+
